@@ -1,0 +1,12 @@
+package com.quiz.services;
+
+
+import com.quiz.entities.Quiz;
+
+public interface QuizServices {
+
+	public Quiz add(Quiz quiz);
+	public Iterable<Quiz> getAll();
+	public Quiz getOne();
+	
+}

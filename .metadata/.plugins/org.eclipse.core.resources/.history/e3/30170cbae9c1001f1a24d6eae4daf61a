@@ -1,0 +1,37 @@
+package com.questions.controller;
+
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.questions.services.QuestionServices;
+
+@RestController
+@RequestMapping("/question")
+public class QuestionController {
+
+	@Autowired
+private QuestionServices questionServices;
+	
+	 public QuestionController(QuestionServices questionServices) {
+		this.questionServices= questionServices;
+	}
+	
+	
+	@PostMapping
+	public Question Add(@RequestBody Question question) {
+		return questionServices.add(question);
+	}
+	
+	@GetMapping
+	public List<Questions> getAll(){
+		return quizServices.getAll();
+	}
+	
+	@GetMapping("/{id}")
+	public Quiz getOn(@PathVariable Long id) {
+		return quizServices.getOne(id);
+	}
+}
