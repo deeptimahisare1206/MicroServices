@@ -9,5 +9,5 @@ public interface QuestionServices {
 	public Questions add(Questions questions);
 	public List<Questions> getAll();
 	public Questions getOne(Long questions_id);
-	
+	public List<Questions> getQuestionsofQuizId(Long quiz_id);
 }

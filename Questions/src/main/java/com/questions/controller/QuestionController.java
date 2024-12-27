@@ -39,4 +39,9 @@ private QuestionServices questionServices;
 	public Questions getOn(@PathVariable Long id) {
 		return questionServices.getOne(id);
 	}
+	
+	@GetMapping("/quiz/{quiz_id}")
+	public List<Questions> getQuestionsofQuizId(@PathVariable Long quiz_id){
+		return questionServices.getQuestionsofQuizId(quiz_id);
+	}
 }

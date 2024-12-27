@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.questions.entities.Questions;
 import com.questions.repositories.QuestionRepository;
@@ -37,6 +38,12 @@ public class QuestionServicesImplement implements QuestionServices{
 		Optional<Questions> iterable = questionRepository.findById(question_id);
 		
 		return iterable.get();
+	}
+
+	@Override
+	public List<Questions> getQuestionsofQuizId(Long quiz_id) {
+		
+		return questionRepository.findByQuizId(quiz_id);
 	}
 
 

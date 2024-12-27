@@ -13,6 +13,9 @@ public class Questions {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long question_id;
 	private String question;
+	private Long quizId;
+	
+	
 	public Long getQuestion_id() {
 		return question_id;
 	}
@@ -25,6 +28,14 @@ public class Questions {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	public Long getQuizId() {
+		return quizId;
+	}
+	public void setQuizId(Long quizId) {
+		this.quizId = quizId;
+	}
+	
+	
 	
 	
 }
