@@ -2,6 +2,7 @@ package com.quiz.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,11 @@ public class QuizServicesImplement implements QuizServices{
 	@Autowired
 	private QuizRepository quizRepository;
 	
-	public QuizServicesImplement(QuizRepository quizRepository) {
+	private QuestionClient questionClient;
+	
+	public QuizServicesImplement(QuizRepository quizRepository,QuestionClient questionClient) {
 		this.quizRepository=quizRepository;
+		this.questionClient= questionClient;
 	}
 
 	@Override
@@ -26,14 +30,24 @@ public class QuizServicesImplement implements QuizServices{
 
 	@Override
 	public List<Quiz> getAll() {
-		return (List<Quiz>)quizRepository.findAll();
+		List<Quiz> quizzes = (List<Quiz>)quizRepository.findAll();
+		
+		List<Quiz> newQuizList = quizzes.stream().map(quiz -> {
+			quiz.setQuestion(questionClient.getQuestionofQuiz(quiz.getId()));
+			return quiz;
+		}).collect(Collectors.toList());
+		return newQuizList;
+		
+		
 	}
 
 	@Override
 	public Quiz getOne(Long id) {
-		Optional<Quiz> iterable = quizRepository.findById(id);
-		
-		return iterable.get();
+		Quiz quiz = quizRepository.findById(id).get();
+		quiz.setQuestion(questionClient.getQuestionofQuiz(quiz.getId()));
+		return quiz;
 	}
+
+	
 
 }

@@ -1,5 +1,7 @@
 package com.quiz.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,8 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	transient private List<Question> question;
+	
 	public Long getId() {
 		return id;
 	}
@@ -27,6 +31,12 @@ public class Quiz {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public List<Question> getQuestion() {
+		return question;
+	}
+	public void setQuestion(List<Question> question) {
+		this.question = question;
 	}
 	
 
